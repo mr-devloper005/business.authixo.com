@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Search, Menu, X } from 'lucide-react'
+import { Search, Menu, X, Radio } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { NAVBAR_OVERRIDE_ENABLED, NavbarOverride } from '@/overrides/navbar'
@@ -25,108 +25,133 @@ export function Navbar() {
     href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`)
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-gray-900 border-b border-gray-800">
-      {/* Top Bar */}
-      <div className="hidden h-8 items-center justify-center bg-gray-800 text-white text-xs md:flex">
-        <div className="flex items-center space-x-6">
-          <span>Press Distribution Platform</span>
-          <span>|</span>
-          <span>Global Media Reach</span>
-        </div>
+    <header className="sticky top-0 z-50 w-full border-b border-[#7F27FF]/15 bg-white/95 backdrop-blur-md shadow-sm">
+      {/* Top ticker bar */}
+      <div className="hidden h-8 items-center justify-center bg-gradient-to-r from-[#7F27FF] to-[#9F70FD] text-white text-xs md:flex gap-2">
+        <Radio className="h-3 w-3 animate-pulse" />
+        <span className="font-medium tracking-wide">Live Press Wire Distribution — Reach 3,200+ Media Outlets</span>
       </div>
-      
+
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo Section */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex flex-col items-start leading-tight">
-              <span className="text-2xl font-bold tracking-tight text-white sm:text-3xl">top24headline</span>
-              <span className="text-xs font-semibold uppercase tracking-widest text-gray-300 mt-1">MEDIA DISTRIBUTION DESK</span>
-            </Link>
-          </div>
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#7F27FF] to-[#9F70FD] shadow-md shadow-[#7F27FF]/25 transition group-hover:shadow-[#7F27FF]/40">
+              <Radio className="h-4 w-4 text-white" />
+            </div>
+            <div className="leading-tight">
+              <span className="block text-base font-bold tracking-tight text-[#1a0a2e]">PressWire</span>
+              <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#7F27FF]">Media Distribution</span>
+            </div>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:flex-1 lg:justify-center lg:items-center">
-            <ul className="flex items-center space-x-8">
-              {navLinks.map((task) => {
-                const isActive = isActiveLink(task.href)
-                return (
+          {/* Desktop nav */}
+          <ul className="hidden lg:flex items-center gap-7">
+            {navLinks.map((link) => {
+              const isActive = isActiveLink(link.href)
+              return (
+                <li key={link.key}>
                   <Link
-                    key={task.key}
-                    href={task.href}
+                    href={link.href}
                     className={cn(
                       'text-sm font-medium transition-colors duration-200',
-                      isActive ? 'text-orange-500' : 'text-gray-300 hover:text-white'
+                      isActive
+                        ? 'text-[#7F27FF] font-semibold'
+                        : 'text-[#3a2a5a] hover:text-[#7F27FF]'
                     )}
                   >
-                    {task.name}
+                    {link.name}
                   </Link>
-                )
-              })}
-            </ul>
-          </div>
+                </li>
+              )
+            })}
+          </ul>
 
-          {/* Right Section */}
-          <div className="flex items-center space-x-4">
-            {/* Search Bar */}
+          {/* Right actions */}
+          <div className="flex items-center gap-3">
+            {/* Search */}
             <div className="hidden lg:flex items-center">
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Search"
-                  className="w-48 pl-10 pr-4 py-2 text-sm border border-gray-600 bg-gray-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent placeholder-gray-400"
+                  placeholder="Search releases…"
+                  className="w-44 rounded-full border border-[#e8e0ff] bg-[#f8f5ff] py-2 pl-9 pr-4 text-sm text-[#1a0a2e] placeholder-[#9a8ab0] outline-none focus:border-[#7F27FF] focus:ring-2 focus:ring-[#7F27FF]/20 transition"
                 />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#9a8ab0]" />
               </div>
             </div>
-            
-            {/* Sign in Link */}
-            <Link href="/login" className="hidden lg:block text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200">
+
+            <Link
+              href="/login"
+              className="hidden lg:block text-sm font-medium text-[#3a2a5a] hover:text-[#7F27FF] transition-colors"
+            >
               Sign in
             </Link>
-            
-            {/* Get Started Button */}
-            <Link href="/register" className="hidden lg:block bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full text-sm font-semibold transition-colors duration-200 shadow-md hover:shadow-lg">
-              Start now
+
+            <Link
+              href="/register"
+              className="hidden lg:inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#7F27FF] to-[#9F70FD] px-5 py-2 text-sm font-semibold text-white shadow-md shadow-[#7F27FF]/25 transition hover:shadow-[#7F27FF]/40 hover:opacity-90"
+            >
+              Submit Release
             </Link>
-            
-            {/* Mobile Menu Button */}
-            <Button variant="ghost" size="icon" className="lg:hidden rounded-full text-gray-600 hover:bg-gray-100" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+
+            {/* Mobile toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden rounded-full text-[#3a2a5a] hover:bg-[#f8f5ff]"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 py-4">
-            <div className="space-y-2">
-              {navLinks.map((task) => {
-                const isActive = isActiveLink(task.href)
-                return (
-                  <Link
-                    key={task.key}
-                    href={task.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={cn('block px-4 py-2 text-base font-medium transition-colors', isActive ? 'text-orange-500 bg-gray-800' : 'text-gray-300 hover:text-white hover:bg-gray-800')}
-                  >
-                    {task.name}
-                  </Link>
-                )
-              })}
-              <div className="px-4 py-2">
+          <div className="lg:hidden border-t border-[#e8e0ff] py-4 space-y-1">
+            {navLinks.map((link) => {
+              const isActive = isActiveLink(link.href)
+              return (
+                <Link
+                  key={link.key}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={cn(
+                    'block rounded-xl px-4 py-2.5 text-sm font-medium transition-colors',
+                    isActive
+                      ? 'bg-[#7F27FF]/08 text-[#7F27FF] font-semibold'
+                      : 'text-[#3a2a5a] hover:bg-[#f8f5ff] hover:text-[#7F27FF]'
+                  )}
+                >
+                  {link.name}
+                </Link>
+              )
+            })}
+            <div className="px-4 pt-2 pb-1">
+              <div className="relative">
                 <input
                   type="text"
-                  placeholder="Search"
-                  className="w-full pl-10 pr-4 py-2 text-sm border border-gray-600 bg-gray-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent placeholder-gray-400"
+                  placeholder="Search releases…"
+                  className="w-full rounded-full border border-[#e8e0ff] bg-[#f8f5ff] py-2 pl-9 pr-4 text-sm text-[#1a0a2e] placeholder-[#9a8ab0] outline-none focus:border-[#7F27FF]"
                 />
-                <Search className="absolute left-7 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#9a8ab0]" />
               </div>
-              <Link href="/login" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white">
+            </div>
+            <div className="flex gap-2 px-4 pt-2">
+              <Link
+                href="/login"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex-1 rounded-full border border-[#7F27FF]/30 py-2 text-center text-sm font-medium text-[#7F27FF] transition hover:bg-[#7F27FF]/05"
+              >
                 Sign in
               </Link>
-              <Link href="/register" onClick={() => setIsMobileMenuOpen(false)} className="block mx-4 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full text-sm font-semibold text-center transition-colors duration-200 shadow-md hover:shadow-lg">
-                Start now
+              <Link
+                href="/register"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex-1 rounded-full bg-gradient-to-r from-[#7F27FF] to-[#9F70FD] py-2 text-center text-sm font-semibold text-white shadow-md"
+              >
+                Submit Release
               </Link>
             </div>
           </div>

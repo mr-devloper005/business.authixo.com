@@ -1,86 +1,116 @@
 import Link from 'next/link'
-import { Bookmark, Building2, FileText, Image as ImageIcon, Sparkles } from 'lucide-react'
+import { Radio, Check } from 'lucide-react'
 import { NavbarShell } from '@/components/shared/navbar-shell'
 import { Footer } from '@/components/shared/footer'
-import { getFactoryState } from '@/design/factory/get-factory-state'
-import { getProductKind } from '@/design/factory/get-product-kind'
 import { REGISTER_PAGE_OVERRIDE_ENABLED, RegisterPageOverride } from '@/overrides/register-page'
-
-function getRegisterConfig(kind: ReturnType<typeof getProductKind>) {
-  // Always return dark theme with orange accents to match homepage
-  return {
-    shell: 'bg-gray-900 text-white',
-    panel: 'border border-gray-700 bg-gray-800',
-    side: 'border border-gray-700 bg-gray-800',
-    muted: 'text-gray-300',
-    action: 'bg-orange-500 text-white hover:bg-orange-600',
-    icon: Sparkles,
-    title: 'Create your top24headline account',
-    body: 'Join our press wire distribution platform and start reaching thousands of media outlets with your news.',
-  }
-}
 
 export default function RegisterPage() {
   if (REGISTER_PAGE_OVERRIDE_ENABLED) {
     return <RegisterPageOverride />
   }
 
-  const { recipe } = getFactoryState()
-  const productKind = getProductKind(recipe)
-  const config = getRegisterConfig(productKind)
-  const Icon = config.icon
-
   return (
-    <div className={`min-h-screen ${config.shell}`}>
+    <div className="flex min-h-screen flex-col bg-white text-[#1a0a2e]">
       <NavbarShell />
-      <main className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <section className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
-          <div className={`rounded-[2rem] p-8 ${config.side}`}>
-            <Icon className="h-8 w-8" />
-            <h1 className="mt-5 text-4xl font-semibold tracking-[-0.05em]">{config.title}</h1>
-            <p className={`mt-5 text-sm leading-8 ${config.muted}`}>{config.body}</p>
-            <div className="mt-8 space-y-4">
-              <h3 className="text-lg font-semibold text-white">Why choose top24headline?</h3>
-              <div className="space-y-3">
+      <main className="mx-auto flex w-full max-w-6xl flex-1 items-center px-4 py-10 sm:px-6 lg:px-8">
+        <section className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-stretch">
+
+          {/* Left panel */}
+          <div className="relative overflow-hidden rounded-3xl bg-[#0d0520] p-8 text-white lg:p-10">
+            <div className="pointer-events-none absolute -top-20 -left-20 h-[350px] w-[350px] rounded-full bg-[#7F27FF]/25 blur-[100px]" />
+            <div className="pointer-events-none absolute -bottom-10 right-0 h-[250px] w-[250px] rounded-full bg-[#FDBF60]/15 blur-[80px]" />
+            <div className="relative">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#7F27FF] to-[#9F70FD] shadow-md shadow-[#7F27FF]/30">
+                <Radio className="h-5 w-5 text-white" />
+              </div>
+              <h1 className="mt-6 text-3xl font-bold tracking-[-0.04em] lg:text-4xl">
+                Start distributing your press releases
+              </h1>
+              <p className="mt-4 text-sm leading-7 text-white/65">
+                Join thousands of PR teams and brands using PressWire to reach journalists, editors, and digital publishers at scale.
+              </p>
+              <ul className="mt-8 space-y-3">
                 {[
-                  'Global press wire distribution to thousands of media outlets',
-                  'Professional platform with advanced analytics and reporting',
-                  'Dedicated support for PR professionals and businesses'
+                  'Global distribution to 3,200+ media outlets',
+                  'Professional analytics and pickup reports',
+                  'Dedicated editorial support team',
+                  'Fast turnaround — live within 24 hours',
                 ].map((item) => (
-                  <div key={item} className="rounded-xl border border-gray-600 bg-gray-700/50 px-4 py-3 text-sm text-gray-300">
+                  <li key={item} className="flex items-center gap-3 text-sm text-white/80">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#7F27FF]/30">
+                      <Check className="h-3 w-3 text-[#9F70FD]" />
+                    </span>
                     {item}
-                  </div>
+                  </li>
                 ))}
+              </ul>
+
+              {/* Social proof */}
+              <div className="mt-8 rounded-2xl border border-white/10 bg-white/05 p-4">
+                <p className="text-sm italic text-white/70">
+                  "The formatting quality makes our updates look like true newsroom pieces."
+                </p>
+                <p className="mt-2 text-xs font-semibold text-[#FDBF60]">— Marcus T., Communications Lead</p>
               </div>
             </div>
           </div>
 
-          <div className={`rounded-[2rem] p-8 ${config.panel}`}>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-orange-500">Create account</p>
-            <form className="mt-6 grid gap-6">
+          {/* Right panel — form */}
+          <div className="rounded-3xl border border-[#e8e0ff] bg-white p-8 shadow-sm lg:p-10">
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#7F27FF]">
+              Create account
+            </span>
+            <h2 className="mt-3 text-2xl font-bold text-[#1a0a2e]">Join PressWire today</h2>
+            <p className="mt-1 text-sm text-[#5a4a7a]">Fill in your details to get started.</p>
+
+            <form className="mt-7 grid gap-4">
               <div>
-                <label className="mb-2 block text-sm font-semibold text-gray-300">Full name</label>
-                <input className="h-12 w-full rounded-xl border border-gray-600 bg-gray-700 px-4 text-sm text-white placeholder-gray-400 focus:border-orange-500 focus:outline-none" placeholder="John Doe" />
+                <label className="mb-1.5 block text-sm font-medium text-[#1a0a2e]">Full name</label>
+                <input
+                  type="text"
+                  className="h-12 w-full rounded-xl border border-[#e8e0ff] bg-[#f8f5ff] px-4 text-sm text-[#1a0a2e] placeholder-[#9a8ab0] outline-none focus:border-[#7F27FF] focus:ring-2 focus:ring-[#7F27FF]/20 transition"
+                  placeholder="John Doe"
+                />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-semibold text-gray-300">Email address</label>
-                <input className="h-12 w-full rounded-xl border border-gray-600 bg-gray-700 px-4 text-sm text-white placeholder-gray-400 focus:border-orange-500 focus:outline-none" placeholder="john@example.com" />
+                <label className="mb-1.5 block text-sm font-medium text-[#1a0a2e]">Email address</label>
+                <input
+                  type="email"
+                  className="h-12 w-full rounded-xl border border-[#e8e0ff] bg-[#f8f5ff] px-4 text-sm text-[#1a0a2e] placeholder-[#9a8ab0] outline-none focus:border-[#7F27FF] focus:ring-2 focus:ring-[#7F27FF]/20 transition"
+                  placeholder="john@example.com"
+                />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-semibold text-gray-300">Password</label>
-                <input className="h-12 w-full rounded-xl border border-gray-600 bg-gray-700 px-4 text-sm text-white placeholder-gray-400 focus:border-orange-500 focus:outline-none" placeholder="Create a strong password" type="password" />
+                <label className="mb-1.5 block text-sm font-medium text-[#1a0a2e]">Password</label>
+                <input
+                  type="password"
+                  className="h-12 w-full rounded-xl border border-[#e8e0ff] bg-[#f8f5ff] px-4 text-sm text-[#1a0a2e] placeholder-[#9a8ab0] outline-none focus:border-[#7F27FF] focus:ring-2 focus:ring-[#7F27FF]/20 transition"
+                  placeholder="Create a strong password"
+                />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-semibold text-gray-300">What are you creating or publishing?</label>
-                <input className="h-12 w-full rounded-xl border border-gray-600 bg-gray-700 px-4 text-sm text-white placeholder-gray-400 focus:border-orange-500 focus:outline-none" placeholder="Press wires, news, announcements..." />
+                <label className="mb-1.5 block text-sm font-medium text-[#1a0a2e]">What will you be publishing?</label>
+                <input
+                  type="text"
+                  className="h-12 w-full rounded-xl border border-[#e8e0ff] bg-[#f8f5ff] px-4 text-sm text-[#1a0a2e] placeholder-[#9a8ab0] outline-none focus:border-[#7F27FF] focus:ring-2 focus:ring-[#7F27FF]/20 transition"
+                  placeholder="Press releases, announcements…"
+                />
               </div>
-              <button type="submit" className={`inline-flex h-12 items-center justify-center rounded-full px-8 text-sm font-semibold ${config.action} shadow-lg hover:shadow-xl transition-all duration-200`}>Create account</button>
+              <button
+                type="submit"
+                className="mt-1 inline-flex h-12 w-full items-center justify-center rounded-full bg-gradient-to-r from-[#7F27FF] to-[#9F70FD] text-sm font-semibold text-white shadow-md shadow-[#7F27FF]/25 transition hover:opacity-90"
+              >
+                Create account
+              </button>
             </form>
-            <div className={`mt-8 flex items-center justify-between text-sm ${config.muted}`}>
+
+            <div className="mt-6 flex items-center justify-between text-sm text-[#5a4a7a]">
               <span>Already have an account?</span>
-              <Link href="/login" className="inline-flex items-center gap-2 font-semibold text-orange-500 hover:text-orange-400 transition-colors duration-200">
-                <Sparkles className="h-4 w-4" />
-                Sign in
+              <Link
+                href="/login"
+                className="font-semibold text-[#7F27FF] transition hover:text-[#9F70FD]"
+              >
+                Sign in →
               </Link>
             </div>
           </div>
