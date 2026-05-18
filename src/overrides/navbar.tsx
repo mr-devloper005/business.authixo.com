@@ -1,38 +1,40 @@
 'use client'
 
 import Link from 'next/link'
-import { Search } from 'lucide-react'
+import { Search, Radio } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/site-config'
 
 export const NAVBAR_OVERRIDE_ENABLED = false
 
-const utilityLinks = [
-  { label: 'About Us', href: '/about' },
-  { label: 'Terms of Service', href: '/terms' },
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Contact Us', href: '/contact' },
-]
-
 export function NavbarOverride() {
   return (
-    <header className="border-b border-neutral-200 bg-white text-neutral-800">
-      <div className="border-b border-neutral-200 bg-neutral-50">
-        <div className="mx-auto flex max-w-6xl flex-wrap gap-x-4 gap-y-1 px-4 py-3 text-[13px] sm:px-6">
-          {utilityLinks.map((item) => (
-            <Link key={item.label} href={item.href} className="hover:text-black">{item.label}</Link>
-          ))}
-        </div>
+    <header className="sticky top-0 z-50 w-full border-b border-[#7F27FF]/15 bg-white/95 backdrop-blur-md shadow-sm">
+      {/* Top bar */}
+      <div className="hidden h-8 items-center justify-center bg-gradient-to-r from-[#7F27FF] to-[#9F70FD] text-white text-xs md:flex gap-2">
+        <Radio className="h-3 w-3 animate-pulse" />
+        <span className="font-medium tracking-wide">Live Press Wire Distribution — Reach 3,200+ Media Outlets</span>
       </div>
-      <div className="mx-auto max-w-6xl px-4 py-8 text-center sm:px-6">
-        <Link href="/" className="text-5xl font-black uppercase tracking-[0.18em] text-black sm:text-6xl" style={{ fontFamily: 'Georgia, Times New Roman, serif' }}>
-          {SITE_CONFIG.name}
+      {/* Brand row */}
+      <div className="mx-auto max-w-6xl px-4 py-5 text-center sm:px-6">
+        <Link href="/" className="inline-flex flex-col items-center gap-1">
+          <span className="text-4xl font-black tracking-[-0.04em] text-[#1a0a2e] sm:text-5xl">
+            {SITE_CONFIG.name}
+          </span>
+          <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#7F27FF]">
+            Media Press Wire Platform
+          </span>
         </Link>
       </div>
-      <div className="border-t border-neutral-200">
-        <div className="mx-auto flex max-w-6xl items-center justify-center gap-6 px-4 py-4 text-sm uppercase tracking-[0.08em] sm:px-6">
-          <Link href="/" className="text-[#4a90ff]">Home</Link>
-          <Link href="/contact" className="hover:text-black">Contact</Link>
-          <Link href="/search" className="hover:text-black"><Search className="h-4 w-4" /></Link>
+      {/* Nav row */}
+      <div className="border-t border-[#e8e0ff]">
+        <div className="mx-auto flex max-w-6xl items-center justify-center gap-7 px-4 py-3 text-sm sm:px-6">
+          <Link href="/" className="font-semibold text-[#7F27FF]">Home</Link>
+          <Link href="/updates" className="text-[#3a2a5a] transition hover:text-[#7F27FF]">Newsroom</Link>
+          <Link href="/about" className="text-[#3a2a5a] transition hover:text-[#7F27FF]">About</Link>
+          <Link href="/contact" className="text-[#3a2a5a] transition hover:text-[#7F27FF]">Contact</Link>
+          <Link href="/search" className="text-[#3a2a5a] transition hover:text-[#7F27FF]">
+            <Search className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </header>

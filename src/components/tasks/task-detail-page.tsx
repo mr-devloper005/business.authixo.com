@@ -248,13 +248,13 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
   }
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-white">
       <NavbarShell />
       <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <SchemaJsonLd data={schemaPayload} />
         <Link
           href={taskConfig?.route || "/"}
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200"
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#e8e0ff] bg-[#f8f5ff] px-4 py-2 text-sm font-medium text-[#7F27FF] transition hover:bg-[#7F27FF]/10"
         >
           <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -274,35 +274,27 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
                 {/* Article Header */}
                 <div className="mb-8">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-gradient-to-r from-orange-500 to-orange-600 text-white">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-gradient-to-r from-[#7F27FF] to-[#9F70FD] text-white">
                       Press Wire
                     </span>
-                    <Badge variant="secondary" className="inline-flex items-center gap-1 bg-orange-50 text-orange-700 border-orange-200">
+                    <Badge variant="secondary" className="inline-flex items-center gap-1 bg-[#7F27FF]/08 text-[#7F27FF] border-[#7F27FF]/20">
                       <Tag className="h-3.5 w-3.5" />
                       {category}
                     </Badge>
                   </div>
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white mb-6">
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[#1a0a2e] mb-6">
                     {post.title}
                   </h1>
                   {articleSummary ? (
-                    <p className="text-xl leading-8 text-gray-300 mb-6">{articleSummary}</p>
+                    <p className="text-xl leading-8 text-[#5a4a7a] mb-6">{articleSummary}</p>
                   ) : null}
-                  <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400 border-b border-gray-700 pb-6">
+                  <div className="flex flex-wrap items-center gap-6 text-sm text-[#7a6a9a] border-b border-[#e8e0ff] pb-6">
                     <div className="flex items-center gap-2">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 flex items-center justify-center text-white font-semibold">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7F27FF] to-[#9F70FD] flex items-center justify-center text-white font-semibold">
                         {articleAuthor.charAt(0).toUpperCase()}
                       </div>
-                      <span className="font-medium text-white">{articleAuthor}</span>
+                      <span className="font-medium text-[#1a0a2e]">{articleAuthor}</span>
                     </div>
-                    {articleDate ? (
-                      <div className="flex items-center gap-2">
-                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <span>{articleDate}</span>
-                      </div>
-                    ) : null}
                   </div>
                 </div>
 
@@ -321,8 +313,18 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
                 ) : null}
 
                 {/* Article Content */}
-                <div className="prose prose-lg prose-gray max-w-none mb-8">
-                  <RichContent html={articleHtml} className="leading-8 prose-p:my-6 prose-h2:my-8 prose-h3:my-6 prose-ul:my-6 prose-headings:text-white prose-headings:font-semibold" />
+                <div className="prose prose-lg max-w-none mb-8
+                  prose-headings:text-[#1a0a2e] prose-headings:font-bold
+                  prose-p:text-[#3a2a5a] prose-p:leading-8
+                  prose-a:text-[#7F27FF] prose-a:no-underline hover:prose-a:underline
+                  prose-strong:text-[#1a0a2e]
+                  prose-ul:text-[#3a2a5a] prose-ol:text-[#3a2a5a]
+                  prose-li:marker:text-[#7F27FF]
+                  prose-blockquote:border-l-[#7F27FF] prose-blockquote:text-[#5a4a7a]
+                  prose-hr:border-[#e8e0ff]
+                  prose-h2:text-[#7F27FF]
+                ">
+                  <RichContent html={articleHtml} className="leading-8 prose-p:my-6 prose-h2:my-8 prose-h3:my-6 prose-ul:my-6" />
                 </div>
 
                 {/* Tags */}
