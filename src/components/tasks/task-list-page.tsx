@@ -98,7 +98,7 @@ export async function TaskListPage({
           button: 'bg-slate-950 text-white hover:bg-slate-800',
         }
 
-  const listPath = basePath || taskConfig?.route || '/public-relation'
+  const listPath = basePath || taskConfig?.route || '/news-releases'
 
   if (task === 'mediaDistribution') {
     return (

@@ -14,7 +14,7 @@ export const siteContent = {
       'A media-first publishing surface built for high-visibility announcements, campaign updates, and business press wires.',
     primaryCta: {
       label: 'Browse latest releases',
-      href: '/public-relation',
+      href: '/news-releases',
     },
     secondaryCta: {
       label: 'Talk to our team',
@@ -53,7 +53,7 @@ export const siteContent = {
     ],
     primaryLink: {
       label: 'Open newsroom',
-      href: '/public-relation',
+      href: '/news-releases',
     },
     secondaryLink: {
       label: 'Contact support',
@@ -71,7 +71,7 @@ export const siteContent = {
     },
     secondaryCta: {
       label: 'View newsroom',
-      href: '/public-relation',
+      href: '/news-releases',
     },
   },
   taskSectionHeading: 'Latest releases',
