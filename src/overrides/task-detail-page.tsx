@@ -52,6 +52,8 @@ export async function TaskDetailPageOverride({ slug }: { task: TaskKey; slug: st
     .slice(0, 5)
 
   const content = (post.content || {}) as Record<string, unknown>
+  const images = getImageUrls(post, content)
+  const hero = images[0] || null
   const html = formatRichHtml((content.body as string) || post.summary || '', 'Post body will appear here.')
   const category = String((content.category as string) || 'Press Release')
   const author = post.authorName || 'Editorial Desk'
