@@ -2,7 +2,7 @@ export const siteTaskDefinitions = [
   {
     key: 'mediaDistribution',
     label: 'Updates',
-    route: '/public-relation',
+    route: '/news-releases',
     description: 'Recent posts and newsroom updates.',
     contentType: 'mediaDistribution',
     enabled: true,
@@ -10,5 +10,5 @@ export const siteTaskDefinitions = [
 ] as const
 
 export const siteTaskViews = {
-  mediaDistribution: '/public-relation',
+  mediaDistribution: '/news-releases',
 } as const

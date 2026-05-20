@@ -51,7 +51,7 @@ export default async function HomePage() {
     revalidate: 120,
   })
   const updatesRoute =
-    SITE_CONFIG.tasks.find((task) => task.key === 'mediaDistribution')?.route || '/public-relation'
+    SITE_CONFIG.tasks.find((task) => task.key === 'mediaDistribution')?.route || '/news-releases'
   const featuredUpdates = mediaDistributionPosts.slice(0, 6)
   const heroPost = featuredUpdates[0]
   const recentPosts = featuredUpdates.slice(1, 4)
